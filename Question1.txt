@@ -5,57 +5,28 @@ class Program
     static void Main()
     {
         // Prompt the user to enter their registration number
-        Console.Write("Enter Reg No: ");
-        string registration = Console.ReadLine();  // Read the registration number from user input
+        Console.Write("Enter Reg No (e.g., 47): ");
+        string registration = Console.ReadLine(); // Read registration number
 
-        // Extract the last two digits from the registration number
-        string lastTwoDigits = registration.Substring(registration.Length - 2);  // Get the last two characters from the registration number
+        // Extract first and second digit from the registration number
+        char digit1 = registration[0]; // First digit as char
+        char digit2 = registration[1]; // Second digit as char
 
-        // Prompt the user to enter the value of x
-        Console.Write("Enter value of x: ");
-        string userX = Console.ReadLine();  // Read the value for x from user input
+        // Convert them to integers (x and y)
+        int x = int.Parse(digit1.ToString()); // Convert first digit to int
+        int y = int.Parse(digit2.ToString()); // Convert second digit to int
 
-        // Prompt the user to enter the value of y
-        Console.Write("Enter value of y: ");
-        string userY = Console.ReadLine();  // Read the value for y from user input
+        // Ask the user to enter z manually
+        Console.Write("Enter value of z: ");
+        int z = int.Parse(Console.ReadLine()); // Read and convert z
 
-        // Set a fixed value for z
-        string userZ = "4";  // The fixed value of z is 4
+        // Calculate result
+        int result = x * y + z;
 
-        // Prepare the input string in the format "x:{userX}; y:{userY}; z:{userZ}; result: x * y + z;"
-        string input = $"x:{userX}; y:{userY}; z:{userZ}; result: x * y + z;";  // Format the input string
-
-        // Extract the values of x, y, and z using the ExtractValue method
-        int xWithID = ExtractValue(input, "x");  // Get the value of x
-        int y = ExtractValue(input, "y");  // Get the value of y
-        int z = ExtractValue(input, "z");  // Get the value of z
-
-        // Perform the calculation: x * y + z
-        int result = xWithID * y + z;  // Calculate the result
-
-        // Display the values of x, y, z, and the final result
-        Console.WriteLine($"\nx{lastTwoDigits} = {xWithID}");  // Display the value of x with the last two digits of the registration number
-        Console.WriteLine($"y = {y}");  // Display the value of y
-        Console.WriteLine($"z = {z}");  // Display the value of z
-        Console.WriteLine($"Result = {result}");  // Display the calculated result
-    }
-
-    // Method to extract the value of a given variable (x, y, or z) from the input string
-    static int ExtractValue(string input, string variable)
-    {
-        string[] parts = input.Split(';');  // Split the input string into parts based on the semicolon separator
-        foreach (string part in parts)  // Loop through each part of the input string
-        {
-            string trimmed = part.Trim();  // Remove any leading or trailing whitespace from the current part
-            if (trimmed.StartsWith(variable + ":"))  // Check if the part starts with the variable name (e.g., "x:" or "y:")
-            {
-                string valuePart = trimmed.Substring(variable.Length + 1).Trim();  // Get the value after the colon and trim any spaces
-                if (int.TryParse(valuePart, out int value))  // Try to parse the value to an integer
-                {
-                    return value;  // Return the parsed value
-                }
-            }
-        }
-        return 0;  // Return 0 if the value could not be found or parsed
+        // Display all values and result
+        Console.WriteLine($"\nx = {x}");
+        Console.WriteLine($"y = {y}");
+        Console.WriteLine($"z = {z}");
+        Console.WriteLine($"Result (x * y + z) = {result}");
     }
 }
